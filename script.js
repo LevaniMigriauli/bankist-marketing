@@ -36,15 +36,6 @@ document.addEventListener('keydown', function (e) {
 })
 
 ///////////////////////////////////////
-// Button smooth scrolling
-
-btnScrollTo.addEventListener('click', function (e) {
-  section1.scrollIntoView({
-    behavior: 'smooth'
-  })
-})
-
-///////////////////////////////////////
 // Page navigation
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
@@ -61,3 +52,35 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     })
   }
 })
+
+///////////////////////////////////////
+// Tabbed component
+
+const operationContents = Array.from(
+  document.querySelectorAll('.operations__content'))
+
+const operationsTabContainer = document.querySelector(
+  '.operations__tab-container')
+
+operationsTabContainer.addEventListener('click', function (e) {
+
+  if (![...e.target.classList].includes('operations__tab--active') &&
+    [...e.target.classList].includes('operations__tab')) {
+    const currentTabNumber = e.target.getAttribute('data-tab')
+    console.log(currentTabNumber)
+
+    Array.from(operationsTabContainer.children).
+      forEach(function (tab, i) {
+        if ([...tab.classList].includes('operations__tab--active')) {
+          tab.classList.remove('operations__tab--active')
+          operationContents[i].classList.remove(
+            'operations__content--active')
+        }
+      })
+
+    e.target.classList.add('operations__tab--active')
+    operationContents[currentTabNumber - 1].classList.add(
+      'operations__content--active')
+  }
+})
+
