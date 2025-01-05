@@ -63,10 +63,10 @@ const operationsTabContainer = document.querySelector(
   '.operations__tab-container')
 
 operationsTabContainer.addEventListener('click', function (e) {
-
-  if (![...e.target.classList].includes('operations__tab--active') &&
-    [...e.target.classList].includes('operations__tab')) {
-    const currentTabNumber = e.target.getAttribute('data-tab')
+  const clickedBtn = e.target.closest('.operations__tab')
+  if (![...clickedBtn.classList].includes('operations__tab--active') &&
+    [...clickedBtn.classList].includes('operations__tab')) {
+    const currentTabNumber = clickedBtn.getAttribute('data-tab')
     console.log(currentTabNumber)
 
     Array.from(operationsTabContainer.children).
@@ -78,7 +78,7 @@ operationsTabContainer.addEventListener('click', function (e) {
         }
       })
 
-    e.target.classList.add('operations__tab--active')
+    clickedBtn.classList.add('operations__tab--active')
     operationContents[currentTabNumber - 1].classList.add(
       'operations__content--active')
   }
