@@ -4,11 +4,8 @@ const modal = document.querySelector('.modal')
 const overlay = document.querySelector('.overlay')
 const btnCloseModal = document.querySelector('.btn--close-modal')
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal')
-const btnScrollTo = document.querySelector('.btn--scroll-to')
-const section1 = document.querySelector('#section--1')
-const section2 = document.querySelector('#section--2')
-const section3 = document.querySelector('#section--3')
-const sections = [section1, section2, section3]
+const nav = document.querySelector('.nav')
+
 
 ///////////////////////////////////////
 // Modal window
@@ -79,4 +76,6 @@ tabsContainer.addEventListener('click', function (e) {
     classList.
     add('operations__content--active')
 })
+
+// Menu fade animation
 
