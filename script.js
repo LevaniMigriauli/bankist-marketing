@@ -6,6 +6,9 @@ const btnCloseModal = document.querySelector('.btn--close-modal')
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal')
 const btnScrollTo = document.querySelector('.btn--scroll-to')
 const section1 = document.querySelector('#section--1')
+const section2 = document.querySelector('#section--2')
+const section3 = document.querySelector('#section--3')
+const sections = [section1, section2, section3]
 
 ///////////////////////////////////////
 // Modal window
@@ -33,10 +36,28 @@ document.addEventListener('keydown', function (e) {
 })
 
 ///////////////////////////////////////
-// Smooth scrolling
+// Button smooth scrolling
 
 btnScrollTo.addEventListener('click', function (e) {
   section1.scrollIntoView({
     behavior: 'smooth'
   })
+})
+
+///////////////////////////////////////
+// Page navigation
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault()
+  const element = e.target
+
+  console.log(element)
+
+  if (element.classList.contains('nav__link')) {
+    const id = element.getAttribute('href')
+    console.log(id)
+    document.querySelector(id).scrollIntoView({
+      behavior: 'smooth'
+    })
+  }
 })
