@@ -56,31 +56,27 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 ///////////////////////////////////////
 // Tabbed component
 
-const operationContents = Array.from(
-  document.querySelectorAll('.operations__content'))
+const tabs = document.querySelectorAll('.operations__tab')
+const tabsContainer = document.querySelector('.operations__tab-container')
+const tabsContent = document.querySelectorAll('.operations__content')
 
-const operationsTabContainer = document.querySelector(
-  '.operations__tab-container')
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab')
+  console.log(clicked)
 
-operationsTabContainer.addEventListener('click', function (e) {
-  const clickedBtn = e.target.closest('.operations__tab')
-  if (![...clickedBtn.classList].includes('operations__tab--active') &&
-    [...clickedBtn.classList].includes('operations__tab')) {
-    const currentTabNumber = clickedBtn.getAttribute('data-tab')
-    console.log(currentTabNumber)
+  // Guard clause
+  if (!clicked) return
 
-    Array.from(operationsTabContainer.children).
-      forEach(function (tab, i) {
-        if ([...tab.classList].includes('operations__tab--active')) {
-          tab.classList.remove('operations__tab--active')
-          operationContents[i].classList.remove(
-            'operations__content--active')
-        }
-      })
+  // Remove active classes
+  tabs.forEach(t => t.classList.remove('operations__tab--active'))
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'))
 
-    clickedBtn.classList.add('operations__tab--active')
-    operationContents[currentTabNumber - 1].classList.add(
-      'operations__content--active')
-  }
+  // Activate tab
+  clicked.classList.add('operations__tab--active')
+
+  // Activate content area
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`).
+    classList.
+    add('operations__content--active')
 })
 
