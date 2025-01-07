@@ -4,7 +4,6 @@ const modal = document.querySelector('.modal')
 const overlay = document.querySelector('.overlay')
 const btnCloseModal = document.querySelector('.btn--close-modal')
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal')
-const section1 = document.querySelector('#section--1')
 const nav = document.querySelector('.nav')
 const tabs = document.querySelectorAll('.operations__tab')
 const tabsContainer = document.querySelector('.operations__tab-container')
@@ -109,3 +108,21 @@ const headerObserver = new IntersectionObserver(stickyNav, {
   rootMargin: `-${navHeight}px`
 })
 headerObserver.observe(header)
+
+///////////////////////////////////////
+// Reveal sections
+const allSections = document.querySelectorAll('.section')
+const revealSection = function (entries, observer) {
+  const [entry] = entries
+
+  if (entry.isIntersecting) entry.target.classList.remove('section--hidden')
+  observer.unobserve(entry.target)
+}
+const sectionsObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15
+})
+allSections.forEach(function (section) {
+  sectionsObserver.observe(section)
+  section.classList.add('section--hidden')
+})
