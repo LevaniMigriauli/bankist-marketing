@@ -113,10 +113,12 @@ headerObserver.observe(header)
 // Reveal sections
 const allSections = document.querySelectorAll('.section')
 const revealSection = function (entries, observer) {
-  const [entry] = entries
-
-  if (entry.isIntersecting) entry.target.classList.remove('section--hidden')
-  observer.unobserve(entry.target)
+  console.log(entries)
+  entries.forEach(entry => {
+  if(!entry.isIntersecting) return
+    entry.target.classList.remove('section--hidden')
+    observer.unobserve(entry.target)
+  })
 }
 const sectionsObserver = new IntersectionObserver(revealSection, {
   root: null,
